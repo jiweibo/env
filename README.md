@@ -14,7 +14,7 @@ cmake -DABSL_BUILD_TESTING=OFF -DABSL_USE_GOOGLETEST_HEAD=ON -DCMAKE_CXX_STANDAR
 cmake --build . --target all
 make install
 export absl_DIR=$PWD/install/lib/cmake/absl
-echo $absl_DIR/lib | tee /etc/ld.so.conf.d/absl.conf
+echo $PWD/install/lib | tee /etc/ld.so.conf.d/absl.conf
 ldconfig
 
 # This is necessary for linking in Abseil.
@@ -31,7 +31,7 @@ cmake -Dprotobuf_ABSL_PROVIDER=package -DCMAKE_PREFIX_PATH=$ABSEIL_INSTALL_PATH 
 make -j8
 make install
 export Protobuf_DIR=$PWD/install/lib/cmake/protobuf
-echo $Protobuf_DIR/lib/ | tee /etc/ld.so.conf.d/protobuf.conf
+echo $PWD/install/lib | tee /etc/ld.so.conf.d/protobuf.conf
 ldconfig
 ```
 
@@ -45,6 +45,6 @@ cmake -DgRPC_INSTALL=ON -DCMAKE_BUILD_TYPE=Release -DgRPC_ABSL_PROVIDER=package 
 make -j8
 make install
 export gRPC_DIR=$PWD/install/lib/cmake/grpc
-echo $gRPC_DIR/lib/ | tee /etc/ld.so.conf.d/grpc.conf
+echo $PWD/install/lib | tee /etc/ld.so.conf.d/grpc.conf
 ldconfig
 ```
