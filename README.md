@@ -27,7 +27,7 @@ git clone --depth 1 --branch v24.2 https://github.com/protocolbuffers/protobuf.g
 cd protobuf
 git submodule update --init --recursive
 mkdir build && cd build
-cmake -Dprotobuf_ABSL_PROVIDER=package -DCMAKE_PREFIX_PATH=$ABSEIL_INSTALL_PATH -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_BUILD_TESTS=OFF -Dabsl_DIR=$absl_DIR ..
+cmake -Dprotobuf_ABSL_PROVIDER=package -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_BUILD_TESTS=OFF -Dabsl_DIR=$absl_DIR ..
 make -j8
 make install
 export Protobuf_DIR=$PWD/install/lib/cmake/protobuf
