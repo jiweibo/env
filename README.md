@@ -27,7 +27,7 @@ git clone --depth 1 --branch v24.2 https://github.com/protocolbuffers/protobuf.g
 cd protobuf
 git submodule update --init --recursive
 mkdir build && cd build
-cmake -Dprotobuf_ABSL_PROVIDER=package -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_BUILD_TESTS=OFF -Dabsl_DIR=$absl_DIR ..
+cmake -Dprotobuf_ABSL_PROVIDER=package -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_BUILD_TESTS=OFF -Dabsl_DIR=$absl_DIR -DCMAKE_INSTALL_PREFIX=$PWD/install ..
 make -j8
 make install
 export Protobuf_DIR=$PWD/install/lib/cmake/protobuf
@@ -47,4 +47,15 @@ make install
 export gRPC_DIR=$PWD/install/lib/cmake/grpc
 echo $PWD/install/lib | tee /etc/ld.so.conf.d/grpc.conf
 ldconfig
+```
+
+
+
+### jsoncpp
+```
+git clone https://github.com/open-source-parsers/jsoncpp.git
+cd jsoncpp
+cmake .. -DJSONCPP_WITH_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PWD/install
+make -j8
+make install
 ```
