@@ -3,6 +3,10 @@ Software Development Environment
 
 ## cc
 
+### llvm
+```shell
+```
+
 ### abseil
 ```shell
 # https://abseil.io/docs/cpp/quickstart-cmake.html#getting-the-abseil-code
@@ -23,6 +27,7 @@ ldconfig
 
 ### protobuf
 ```shell
+# v4.24.3
 git clone --depth 1 --branch v24.2 https://github.com/protocolbuffers/protobuf.git
 cd protobuf
 git submodule update --init --recursive
@@ -33,6 +38,24 @@ make install
 export Protobuf_DIR=$PWD/install/lib/cmake/protobuf
 echo $PWD/install/lib | tee /etc/ld.so.conf.d/protobuf.conf
 ldconfig
+
+# v3.21.12
+# no absl dependency
+git clone --depth 1 --branch v3.21.12 https://github.com/protocolbuffers/protobuf.git
+cd protobuf
+cmake -Dprotobuf_BUILD_SHARED_LIBS=ON -Dprotobuf_BUILD_TESTS=OFF -DCMAKE_INSTALL_PREFIX=$PWD/install ..
+make -j8
+make install
+```
+
+### flatbuffers
+```shell
+git clone https://github.com/google/flatbuffers.git
+cd flatbuffers
+cmake .. -DFLATBUFFERS_BUILD_SHAREDLIB=ON -DCMAKE_INSTALL_PREFIX=$PWD/install
+make -j8
+make install
+echo $PWD/install/lib | tee /etc/ld.so.conf.d/flatbuffers.conf
 ```
 
 ### grpc
