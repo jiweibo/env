@@ -5,6 +5,17 @@ Software Development Environment
 
 ### llvm
 ```shell
+git clone https://github.com/llvm/llvm-project.git
+cd llvm-project
+mkdir build && cd build
+cmake -G Ninja ../llvm \
+  -DLLVM_ENABLE_PROJECTS=mlir \
+  -DLLVM_BUILD_EXAMPLES=ON \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DLLVM_ENABLE_ASSERTIONS=ON \
+  -DLLVM_ENABLE_RTTI=ON \
+  -DLLVM_TARGETS_TO_BUILD="Native;NVPTX;AMDGPU"
+make -j8
 ```
 
 ### abseil
@@ -71,8 +82,6 @@ export gRPC_DIR=$PWD/install/lib/cmake/grpc
 echo $PWD/install/lib | tee /etc/ld.so.conf.d/grpc.conf
 ldconfig
 ```
-
-
 
 ### jsoncpp
 ```
