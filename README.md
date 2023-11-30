@@ -83,6 +83,20 @@ echo $PWD/install/lib | tee /etc/ld.so.conf.d/grpc.conf
 ldconfig
 ```
 
+### opencv
+```
+# https://opencv.org/get-started/
+git clone https://github.com/opencv/opencv.git
+git clone https://github.com/opencv/opencv_contrib.git
+VERSION=4.8.1
+pushd opencv_contrib && git checkout $VERSION && popd
+cd opencv && git checkout $VERSION
+mkdir build && cd build
+cmake -G Ninja -DOPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules/ -DBUILD_SHARED_LIBS=ON -DWITH_CUDA=ON -DCUDA_GENERATION=Ampere -DCMAKE_INSTALL_PREFIX=$PWD/install ..
+ninja -j8
+ninja install -j4
+```
+
 ### jsoncpp
 ```
 git clone https://github.com/open-source-parsers/jsoncpp.git
